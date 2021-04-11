@@ -40,3 +40,6 @@ start: ## Start the project (alternative: react-native start --reset-cache)
 
 ios: ## Run ios (alternative: npx react-native run-ios)
 	@yarn ios
+
+build-ios: ## Build ios
+	@cd ios; fastlane ios

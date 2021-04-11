@@ -77,6 +77,10 @@ CocoaPods documentation: https://cocoapods.org/
 - [How to Fastlane with actions](https://www.rootstrap.com/blog/how-to-automate-ios-app-builds-using-fastlane-github/)
 - [How to setup app with fastlane](https://shift.infinite.red/simple-react-native-ios-releases-4c28bb53a97b)
 
+## XCODE
+
+- [Editor](https://www.avanderlee.com/xcode/xcode-assistant-editor/#:~:text=You%20can%20open%20the%20editor,Xcode%20menu%20Editor%20%2D%3E%20Assisant%20.)
+
 ## Fastlane
 
 - [Simple React Native iOS Releases](https://shift.infinite.red/simple-react-native-ios-releases-4c28bb53a97b)
@@ -85,11 +89,17 @@ CocoaPods documentation: https://cocoapods.org/
 
 - [How to customize your Fastfile ](https://docs.fastlane.tools/actions)
 - [Learn more about how to setup code signing with fastlane](https://docs.fastlane.tools/codesigning/getting-started/)
+- [How to cRedentials](https://github.com/fastlane/fastlane/tree/master/credentials_manager)
+- [Fastlane Required creds](https://docs.fastlane.tools/best-practices/continuous-integration/#spaceauth)
+
 
 ```bash
 sudo gem install fastlane --verbose
 xcode-select --install # ensure x-code command line tools
 gem cleanup # optional recommended
+gem update --system
+sudo bundle update
+gem install bundler
 brew install fastlane
 fastlane match init
 fastlane init
@@ -98,3 +108,10 @@ fastlane init
 ## Get Certificates
 
 1. https://developer.apple.com/account/ — For certs etc.
+
+## Github Create a Personal Access token
+
+- [github Access token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
+- [Purchase iOS](https://developer.apple.com/support/purchase-activation/)
+- [Code Signing Troubleshooting](https://github.com/fastlane/fastlane/issues/9041)
+

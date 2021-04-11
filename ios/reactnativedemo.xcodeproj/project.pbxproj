@@ -205,10 +205,12 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						ProvisioningStyle = Manual;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1120;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -432,6 +434,7 @@
 			baseConfigurationReference = 36E3E747D46E6CA8EE6432CD /* Pods-reactnativedemo-reactnativedemoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Manual;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -459,6 +462,7 @@
 			baseConfigurationReference = EA5D3F9F41DC0FC6D233BB61 /* Pods-reactnativedemo-reactnativedemoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = reactnativedemoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -484,7 +488,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = reactnativedemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -510,7 +515,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 3;
 				INFOPLIST_FILE = reactnativedemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
