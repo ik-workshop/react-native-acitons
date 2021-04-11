@@ -6,7 +6,7 @@ repos:
     args: ['--maxkb=500']
   - id: check-executables-have-shebangs
   - id: pretty-format-json
-    args: ['--autofix', '--no-sort-keys', '--indent=4']
+    args: ['--autofix', '--no-sort-keys', '--indent=2']
   - id: check-byte-order-marker
   - id: check-case-conflict
   - id: check-executables-have-shebangs
@@ -23,13 +23,13 @@ repos:
   hooks:
   - id: detect-secrets
     args: ['--baseline', '.secrets.baseline']
-- repo: git://github.com/antonbabenko/pre-commit-terraform
-  rev: v1.21.0
-  hooks:
-  - id: terraform_fmt
-  - id: terraform_validate
-  - id: terraform_docs
 - repo: meta
   hooks:
   - id: check-useless-excludes
-
+- repo: https://github.com/adrienverge/yamllint.git
+  rev: v1.24.2
+  hooks:
+  - id: yamllint
+    files: \.(yaml|yml)$
+    types: [file, yaml]
+    entry: 'yamllint --strict -d "{extends: relaxed, rules: {line-length: {max: 200}}}"'
