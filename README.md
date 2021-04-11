@@ -61,6 +61,7 @@ CocoaPods documentation: https://cocoapods.org/
 ## Resources
 
 - [Env setup](https://reactnative.dev/docs/environment-setup)
+- [Typescript playground](https://www.typescriptlang.org/play)
 
 ## Boilerplats
 
