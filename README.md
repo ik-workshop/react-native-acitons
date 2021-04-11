@@ -58,3 +58,11 @@ Please try again manually: "cd ./AwesomeTSProject/ios && pod install".
 CocoaPods documentation: https://cocoapods.org/
 ```
 
+## Resources
+
+- [Env setup](https://reactnative.dev/docs/environment-setup)
+
+## Boilerplats
+
+- [Typescript: 6/10](https://github.com/AmitM30/react-native-typescript-boilerplate)
+- [Typescript: 7/10](https://github.com/NewBieBR/typescript-react-native-starter)
