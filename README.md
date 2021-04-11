@@ -67,3 +67,10 @@ CocoaPods documentation: https://cocoapods.org/
 
 - [Typescript: 6/10](https://github.com/AmitM30/react-native-typescript-boilerplate)
 - [Typescript: 7/10](https://github.com/NewBieBR/typescript-react-native-starter)
+- [From JS to TSX: 7/10](https://github.com/thmsgbrt/Javascript-to-TypeScript-guide)
+- [Base template](https://github.com/react-native-community/react-native-template-typescript/blob/master/template/App.tsx)
+
+## Tutorials
+
+- [Conver to TSX](https://medium.com/swlh/convert-your-javascript-react-app-to-typescript-the-easy-guide-631592dc1876)
+- [Learn The basics](https://reactnative.dev/docs/tutorial)
