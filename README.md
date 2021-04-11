@@ -74,3 +74,27 @@ CocoaPods documentation: https://cocoapods.org/
 
 - [Conver to TSX](https://medium.com/swlh/convert-your-javascript-react-app-to-typescript-the-easy-guide-631592dc1876)
 - [Learn The basics](https://reactnative.dev/docs/tutorial)
+- [How to Fastlane with actions](https://www.rootstrap.com/blog/how-to-automate-ios-app-builds-using-fastlane-github/)
+- [How to setup app with fastlane](https://shift.infinite.red/simple-react-native-ios-releases-4c28bb53a97b)
+
+## Fastlane
+
+- [Simple React Native iOS Releases](https://shift.infinite.red/simple-react-native-ios-releases-4c28bb53a97b)
+- [Github Actions](https://www.rootstrap.com/blog/how-to-automate-ios-app-builds-using-fastlane-github/)
+- [Secrets Repo: private](https://github.com/ik-workshop/reactnativedemo-secrets)
+
+- [How to customize your Fastfile ](https://docs.fastlane.tools/actions)
+- [Learn more about how to setup code signing with fastlane](https://docs.fastlane.tools/codesigning/getting-started/)
+
+```bash
+sudo gem install fastlane --verbose
+xcode-select --install # ensure x-code command line tools
+gem cleanup # optional recommended
+brew install fastlane
+fastlane match init
+fastlane init
+```
+
+## Get Certificates
+
+1. https://developer.apple.com/account/ — For certs etc.
