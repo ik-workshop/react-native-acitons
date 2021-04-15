@@ -38,8 +38,17 @@ jobs:
       - name: install dependencies
         run: yarn install
 
+      - name: Cache cocoapods
+        uses: actions/cache@v2
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
       - name: install pods
-        run: cd ios && pod install
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: pod install
 
       - name: actions
         run: make
