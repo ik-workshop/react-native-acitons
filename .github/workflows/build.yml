@@ -10,6 +10,7 @@ env:
   KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
   APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
   APPLE_ID: ${{ secrets.APPLE_ID }}
+  HOMEBREW_NO_AUTO_UPDATE: 1
 
 jobs:
   build:
@@ -33,11 +34,27 @@ jobs:
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
+      - name: Update Homebrew
+        run: |
+          brew update --preinstall
+          cat "$(brew --repository)/Library/Taps/homebrew/homebrew-core/Formula/foo.rb" > .github/brew-formulae
+
+      - name: configure homebrew cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/Library/Caches/Homebrew/foo--*
+            ~/Library/Caches/Homebrew/downloads/*--foo-*
+            /usr/local/Cellar/gnupg/*
+          key: brew-${{ hashFiles('.github/brew-formulae') }}
+          restore-keys: brew-
+
       - name: cache yarn
         uses: actions/cache@v1
+        if: ${{ steps.yarn-cache.outputs.dir }}
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: node_modules
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
 
@@ -59,6 +76,8 @@ jobs:
         working-directory: ${{ env.WORKING_DIRECTORY }}
         run: |
           bundle install
+          set +e
+          which gpg
           # pod install
 
       - name: actions
