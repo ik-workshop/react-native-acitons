@@ -37,16 +37,15 @@ jobs:
       - name: update homebrew
         run: |
           brew update --preinstall
-          # cat "$(brew --repository)/Library/Taps/homebrew/homebrew-core/Formula/foo.rb" > .github/brew-formulae
 
       - name: configure homebrew cache
         uses: actions/cache@v2
         with:
           path: |
-            ~/Library/Caches/Homebrew/foo--*
-            ~/Library/Caches/Homebrew/downloads/*--foo-*
+            ~/Library/Caches/Homebrew/*
+            ~/Library/Caches/Homebrew/downloads/*
             /usr/local/Cellar/gnupg/*
-          key: brew-${{ hashFiles('.github/brew-formulae') }}
+          key: brew-b2483058-9ddd-11eb-b64c-c30709652043
           restore-keys: brew-
 
       - name: cache yarn
