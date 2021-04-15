@@ -43,3 +43,6 @@ ios: ## Run ios (alternative: npx react-native run-ios)
 
 build-ios: ## Build ios
 	@cd ios; fastlane ios beta
+
+build-ci: ## Build on CI
+	@cd ios; fastlane ios beta_ci
