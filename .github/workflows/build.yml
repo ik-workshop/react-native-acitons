@@ -32,33 +32,33 @@ jobs:
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - uses: actions/cache@v1
+      - name: cache yarn
+        uses: actions/cache@v1
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: install dependencies
-        if: success()
-        run: yarn install
+      - name: cache cocoapods
+        uses: actions/cache@v2
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
 
-      # - name: cache cocoapods
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ios/Pods
-      #     key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-pods-
-      - name: bundle install
+      - name: 'install dependencies && pod install'
+        if: success()
+        run: |
+          make setup-dependencies
+
+      - name: 'bundle install && pod install'
         if: success()
         working-directory: ${{ env.WORKING_DIRECTORY }}
-        run: bundle install
-
-      - name: install pods
-        if: success()
-        working-directory: ${{ env.WORKING_DIRECTORY }}
-        run: pod install
+        run: |
+          bundle install
+          # pod install
 
       - name: actions
         if: success()

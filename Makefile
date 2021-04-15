@@ -32,7 +32,7 @@ address-in-use: ## Show address in use
 	-@lsof -i :$(port)
 	-@$(shell kill -9 ${pid})
 
-setup-react: ## Set react dependendcies
+setup-dependencies: ## Set react dependendcies
 	@yarn install
 	@npx pod-install
 
