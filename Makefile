@@ -4,6 +4,7 @@ SHELL := /bin/bash
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
+WORKING_DIRECTORY ?= ios
 export port ?= 8081
 
 help:
@@ -42,7 +43,7 @@ ios: ## Run ios (alternative: npx react-native run-ios)
 	@yarn ios
 
 build-ios: ## Build ios
-	@cd ios; fastlane ios beta_local
+	@cd $(WORKING_DIRECTORY); fastlane ios beta_local
 
 build-ci: ## Build on CI
-	fastlane ios beta_ci
+	@cd $(WORKING_DIRECTORY); fastlane ios beta_ci

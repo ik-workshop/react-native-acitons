@@ -21,6 +21,11 @@ or alternatively using `brew install fastlane`
 fastlane ios beta
 ```
 build artifact
+### ios beta_local
+```
+fastlane ios beta_local
+```
+build on local
 ### ios beta_ci
 ```
 fastlane ios beta_ci

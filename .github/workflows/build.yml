@@ -62,5 +62,4 @@ jobs:
 
       - name: fastlane help
         if: success()
-        working-directory: ${{ env.WORKING_DIRECTORY }}
         run: make build-ci
