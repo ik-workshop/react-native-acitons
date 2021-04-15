@@ -133,10 +133,7 @@ end
     unlock_keychain(
       path: "fastlane_tmp_keychain",
       password: keychain_pwd,
-      set_default: true,
-      lock_when_sleeps: true,
-      lock_after_timeout: true,
-      timeout: 3600
+      set_default: true
     )
 
     get_provisioning_profile(
