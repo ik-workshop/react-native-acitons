@@ -139,6 +139,14 @@ end
       timeout: 3600
     )
 
+    get_provisioning_profile(
+      adhoc: true,
+      filename: app_name+".mobileprovision",
+      output_path: out_path,
+      readonly: true, # remove true if profile not exists or removed
+      provisioning_name: provisioning_name
+    )
+
   end
 
 end

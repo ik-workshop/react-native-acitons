@@ -43,13 +43,17 @@ jobs:
         if: success()
         run: yarn install
 
-      - name: Cache cocoapods
-        uses: actions/cache@v2
-        with:
-          path: ios/Pods
-          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pods-
+      # - name: cache cocoapods
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: ios/Pods
+      #     key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-pods-
+      - name: bundle install
+        if: success()
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: bundle install
 
       - name: install pods
         if: success()
