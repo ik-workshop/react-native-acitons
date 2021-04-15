@@ -5,6 +5,10 @@ on:
 
 env:
   WORKING_DIRECTORY: ios
+  ARTIFACT_NAME: artifact
+  PROVISIONING_PROFILE: ${{ secrets.PROVISIONING_PROFILE }}
+  KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+  APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
 
 jobs:
   build:
@@ -59,4 +63,4 @@ jobs:
       - name: fastlane help
         if: success()
         working-directory: ${{ env.WORKING_DIRECTORY }}
-        run: fastlane  --help
+        run: make build-ci

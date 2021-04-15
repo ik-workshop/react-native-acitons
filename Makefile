@@ -45,4 +45,4 @@ build-ios: ## Build ios
 	@cd ios; fastlane ios beta_local
 
 build-ci: ## Build on CI
-	@cd ios; fastlane ios beta_ci
+	fastlane ios beta_ci

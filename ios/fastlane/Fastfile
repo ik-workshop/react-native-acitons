@@ -8,16 +8,137 @@
 # For a list of all available plugins, check out
 #
 #     https://docs.fastlane.tools/plugins/available-plugins
+#     https://github.com/browserstack/browserstack-fastlane-plugin
 #
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
+app_name      = 'reactnativedemo'           # The base name of your app (extended with -Target)
+xcodeproj     = app_name+'.xcodeproj'       # The xcodeproj name eg: ReactNativeBase.xcodeproj
+workspace     = app_name+'.xcworkspace'     # The xworkspace name here eg: ReactNativeBase.xcworkspace
+out_path      = '../storage'
+
+# environment variables
+time              = Time.now.strftime("%Y-%m-%d-%H_%M")
+artifact_name     = ENV['ARTIFACT_NAME']+".ipa" || time+'_artifact.ipa'
+provisioning_name = ENV['PROVISIONING_PROFILE']
+keychain_pwd      = ENV['KEYCHAIN_PASSWORD']
+
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of what the lane does"
-  lane :custom_lane do
-    # add actions here: https://docs.fastlane.tools/actions
+
+raise "Couldn't find profile #{provisioning_name}".red unless provisioning_name
+raise "Couldn't find keychain password #{keychain_pwd}".red unless keychain_pwd
+
+before_all do
+  cocoapods(
+    repo_update: true
+  )
+
+end
+
+after_all do
+  if is_ci
+    clean_build_artifacts
+    putc "Cleaned up"
   end
+end
+
+  desc "build artifact"
+  lane :beta do |options|
+
+    if ENV['IS_CI']
+      # do something
+    else
+      confirm = UI.select("Would you like to proceed?", ["yes", "no"])
+      exit unless confirm.downcase == 'yes'
+    end
+  end
+
+  desc "build on local"
+  lane :beta_local do
+    if is_ci
+      puts "I'm a computer"
+      exit
+    else
+      puts "Hi Human!"
+    end
+
+    # http://docs.fastlane.tools/actions/update_app_identifier/#update_app_identifier
+    update_app_identifier(
+      xcodeproj: xcodeproj, # Optional path to xcodeproj, will use the first .xcodeproj if not set
+      plist_path: app_name+"/Info.plist", # Path to info plist file, relative to xcodeproj
+    )
+
+    # http://docs.fastlane.tools/actions/get_provisioning_profile/#get_provisioning_profile
+    get_provisioning_profile(
+      adhoc: true,
+      filename: app_name+".mobileprovision",
+      output_path: out_path,
+      readonly: true, # remove true if profile not exists or removed
+      provisioning_name: provisioning_name
+    )
+
+    # http://docs.fastlane.tools/actions/cert/#cert
+    get_certificates(
+      development: true,
+      output_path: out_path
+    )
+
+    # fastlane sigh --adhoc
+    update_code_signing_settings(
+      use_automatic_signing: true,
+      path: xcodeproj
+    )
+    # http://docs.fastlane.tools/actions/cocoapods/#cocoapods
+
+    puts artifact_name
+
+    build_ios_app(
+      workspace: workspace,
+      configuration: "Release", #Debug
+      silent: true,
+      clean: true,
+      skip_codesigning: false,
+      output_name: artifact_name,
+      output_directory: out_path,
+      export_method: "ad-hoc",
+      export_options: {
+        method: "ad-hoc",
+        provisioningProfiles: {
+          ENV['APP_IDENTIFIER'] => ENV['PROVISIONIN_PROFILE_ADHOC']
+        }
+      }
+    )
+
+  end
+
+  desc "build on ci"
+  lane :beta_ci do
+    if is_ci
+      puts "I'm a computer"
+      # http://docs.fastlane.tools/actions/setup_ci/#setup_ci
+      setup_ci(
+        force: true,
+        provider: "travis"
+      )
+    else
+      puts "Hi Human!"
+    end
+
+    # Unlock keychain and set as default
+    # http://docs.fastlane.tools/actions/unlock_keychain/#unlock_keychain
+    unlock_keychain(
+      path: "fastlane_tmp_keychain",
+      password: keychain_pwd,
+      set_default: true,
+      lock_when_sleeps: true,
+      lock_after_timeout: true,
+      timeout: 3600
+    )
+
+  end
+
 end
