@@ -98,3 +98,10 @@ DerivedData/
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode
+
+nodes.md
+**/*.cert
+**/*.cer
+**/*.p12
+**/*.zip
+**/*.ipa

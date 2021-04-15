@@ -42,4 +42,4 @@ ios: ## Run ios (alternative: npx react-native run-ios)
 	@yarn ios
 
 build-ios: ## Build ios
-	@cd ios; fastlane ios
+	@cd ios; fastlane ios beta

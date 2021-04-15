@@ -1,7 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-platform :ios, '12.0'
+platform :ios, '10'
 
 target 'reactnativedemo' do
   config = use_native_modules!
@@ -28,7 +28,7 @@ target 'reactnativedemo' do
       installer.pods_project.targets.each do |t|
       t.build_configurations.each do |config|
         # https://stackoverflow.com/questions/61610903/how-to-combine-post-install-in-podfile-in-react-native
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
       end
     end
   end

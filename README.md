@@ -105,6 +105,11 @@ fastlane match init
 fastlane init
 ```
 
+```
+gem pristine --all
+gem update --system
+```
+
 ## Get Certificates
 
 1. https://developer.apple.com/account/ — For certs etc.
@@ -114,4 +119,11 @@ fastlane init
 - [github Access token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
 - [Purchase iOS](https://developer.apple.com/support/purchase-activation/)
 - [Code Signing Troubleshooting](https://github.com/fastlane/fastlane/issues/9041)
+- [Omg. provisioning profile](https://abhimuralidharan.medium.com/what-is-a-provisioning-profile-in-ios-77987a7c54c2)
+- [Setup iOS project](https://www.youtube.com/watch?v=91sTQ39kkK4&ab_channel=Devslopes)
+- [iOS schema](https://developer.apple.com/library/archive/documentation/IDEs/Conceptual/xcode_guide-continuous_integration/ConfigureBots.html#//apple_ref/doc/uid/TP40013292-CH9-SW3)
+- [How to Setup Local](https://makaka.org/unity-tutorials/test-ios-app-without-developer-account)
 
+Provisioning profile
+
+## Ruby issues
