@@ -106,3 +106,5 @@ nodes.md
 **/*.zip
 **/*.ipa
 **/*.mobileprovision
+**/*.certSigningRequest
+storage/*
