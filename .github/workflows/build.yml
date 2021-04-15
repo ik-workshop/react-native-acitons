@@ -9,6 +9,7 @@ env:
   PROVISIONING_PROFILE: ${{ secrets.PROVISIONING_PROFILE }}
   KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
   APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
+  APPLE_ID: ${{ secrets.APPLE_ID }}
 
 jobs:
   build:
@@ -44,7 +45,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ios/Pods
-          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+          key: ${{ runner.os }}-pods-${{ hashFiles('**/ios/Podfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-pods-
 
