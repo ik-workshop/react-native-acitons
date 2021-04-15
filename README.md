@@ -123,7 +123,7 @@ gem update --system
 - [Setup iOS project](https://www.youtube.com/watch?v=91sTQ39kkK4&ab_channel=Devslopes)
 - [iOS schema](https://developer.apple.com/library/archive/documentation/IDEs/Conceptual/xcode_guide-continuous_integration/ConfigureBots.html#//apple_ref/doc/uid/TP40013292-CH9-SW3)
 - [How to Setup Local](https://makaka.org/unity-tutorials/test-ios-app-without-developer-account)
+- [How to create p12 certificate](https://calvium.com/how-to-make-a-p12-file/)
 
-Provisioning profile
 
 ## Ruby issues

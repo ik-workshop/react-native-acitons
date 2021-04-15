@@ -1,0 +1,33 @@
+---
+name: build-ios-app-with-fastlane
+on:
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    strategy:
+      matrix:
+        node-version: [15.14.0]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '1'
+
+      - name: use node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: install dependencies
+        run: yarn install
+
+      - name: install pods
+        run: cd ios && pod install
+
+      - name: actions
+        run: make
+
