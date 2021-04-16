@@ -36,10 +36,10 @@ jobs:
 
       - name: user ruby 3.0
         uses: ruby/setup-ruby@v1
-        working-directory: ${{ env.WORKING_DIRECTORY }}
         with:
           bundler-cache: true
           ruby-version: 3.0
+          working-directory: ${{ env.WORKING_DIRECTORY }}
 
       - name: get yarn cache
         id: yarn-cache
