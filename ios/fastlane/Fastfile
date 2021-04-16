@@ -134,11 +134,13 @@ end
 
     # Unlock keychain and set as default
     # http://docs.fastlane.tools/actions/unlock_keychain/#unlock_keychain
-    # unlock_keychain(
-    #   path: "fastlane_tmp_keychain",
-    #   password: keychain_pwd,
-    #   set_default: true
-    # )
+    if is_ci
+      unlock_keychain(
+        path: "fastlane_tmp_keychain",
+        password: keychain_pwd,
+        set_default: true
+      )
+    end
 
     get_provisioning_profile(
       adhoc: true,

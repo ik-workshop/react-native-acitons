@@ -68,21 +68,19 @@ jobs:
         run: |
           make setup-dependencies
 
-      # - name: 'bundle install && pod install'
-      #   if: success()
-      #   working-directory: ${{ env.WORKING_DIRECTORY }}
-      #   run: |
-      #     bundle install
-      #     # pod install
-
-      - name: actions
+      - name: 'bundle install && pod install'
         if: success()
-        run: make
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: |
+          bundle install
+          # pod install
 
       - name: fastlane help
         if: success()
         working-directory: ${{ env.WORKING_DIRECTORY }}
         run: |
+          ls -la ~
+          export PATH="$HOME/.fastlane/bin:$PATH"
           fastlane ios beta_ci
         env:
           FASTLANE_SESSION: ${{ env.FASTLANE_SESSION }}
