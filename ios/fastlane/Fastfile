@@ -1,4 +1,4 @@
-# This file contains the fastlane.tools configuration
+#This file contains the fastlane.tools configuration
 # You can find the documentation at https://docs.fastlane.tools
 #
 # For a list of all available actions, check out
@@ -141,8 +141,7 @@ end
       filename: app_name+".mobileprovision",
       output_path: out_path,
       readonly: true, # remove true if profile not exists or removed
-      provisioning_name: provisioning_name,
-      username: ENV['APPLE_ID']
+      provisioning_name: provisioning_name
     )
 
   end

@@ -11,6 +11,7 @@ env:
   APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
   APPLE_ID: ${{ secrets.APPLE_ID }}
   HOMEBREW_NO_AUTO_UPDATE: 1
+  FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
 
 jobs:
   build:
@@ -34,9 +35,9 @@ jobs:
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: update homebrew
-        run: |
-          brew update --preinstall
+      # - name: update homebrew
+      #   run: |
+      #     brew update --preinstall
 
       - name: configure homebrew cache
         uses: actions/cache@v2
@@ -75,8 +76,6 @@ jobs:
         working-directory: ${{ env.WORKING_DIRECTORY }}
         run: |
           bundle install
-          set +e
-          which gpg
           # pod install
 
       - name: actions
