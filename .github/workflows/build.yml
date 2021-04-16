@@ -12,6 +12,7 @@ env:
   APPLE_ID: ${{ secrets.APPLE_ID }}
   HOMEBREW_NO_AUTO_UPDATE: 1
   FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
+  FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
 
 jobs:
   build:

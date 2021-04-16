@@ -33,10 +33,11 @@ raise "Couldn't find profile #{provisioning_name}".red unless provisioning_name
 raise "Couldn't find keychain password #{keychain_pwd}".red unless keychain_pwd
 
 before_all do
-  cocoapods(
-    repo_update: true
-  )
-
+  if is_ci
+    cocoapods(
+      repo_update: true
+    )
+  end
 end
 
 after_all do
@@ -130,11 +131,11 @@ end
 
     # Unlock keychain and set as default
     # http://docs.fastlane.tools/actions/unlock_keychain/#unlock_keychain
-    unlock_keychain(
-      path: "fastlane_tmp_keychain",
-      password: keychain_pwd,
-      set_default: true
-    )
+    # unlock_keychain(
+    #   path: "fastlane_tmp_keychain",
+    #   password: keychain_pwd,
+    #   set_default: true
+    # )
 
     get_provisioning_profile(
       adhoc: true,
