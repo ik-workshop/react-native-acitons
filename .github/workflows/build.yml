@@ -82,12 +82,12 @@ jobs:
         run: |
           make setup-dependencies
 
-      - name: 'bundle install && pod install'
-        if: success()
-        working-directory: ${{ env.WORKING_DIRECTORY }}
-        run: |
-          bundle install
-          # pod install
+      # - name: 'bundle install && pod install'
+      #   if: success()
+      #   working-directory: ${{ env.WORKING_DIRECTORY }}
+      #   run: |
+      #     bundle install
+      #     # pod install
 
       - name: actions
         if: success()
