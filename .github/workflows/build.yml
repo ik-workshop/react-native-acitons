@@ -29,10 +29,17 @@ jobs:
         with:
           fetch-depth: '1'
 
-      - name: use node.js ${{ matrix.node-version }}
+      - name: use node.js 15.14
         uses: actions/setup-node@v1
         with:
           node-version: 15.14.0
+
+      - name: user ruby 3.0
+        uses: ruby/setup-ruby@v1
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        with:
+          bundler-cache: true
+          ruby-version: 3.0
 
       - name: get yarn cache
         id: yarn-cache
@@ -87,4 +94,9 @@ jobs:
 
       - name: fastlane help
         if: success()
-        run: make build-ci
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: |
+          fastlane ios beta_ci
+        env:
+          FASTLANE_SESSION: ${{ env.FASTLANE_SESSION }}
+          FASTLANE_USER: ${{ env.FASTLANE_USER }}
