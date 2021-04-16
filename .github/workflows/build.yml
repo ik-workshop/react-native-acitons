@@ -46,22 +46,8 @@ jobs:
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      # - name: update homebrew
-      #   run: |
-      #     brew update --preinstall
-
-      - name: configure homebrew cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/Library/Caches/Homebrew/*
-            ~/Library/Caches/Homebrew/downloads/*
-            /usr/local/Cellar/gnupg/*
-          key: brew-b2483058-9ddd-11eb-b64c-c30709652043
-          restore-keys: brew-
-
       - name: cache yarn
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         if: ${{ steps.yarn-cache.outputs.dir }}
         with:
           path: node_modules
