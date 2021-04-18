@@ -197,8 +197,8 @@ end
       configuration: "Release", #Debug
       silent: true,
       clean: true,
-      skip_codesigning: true,
       # skip_codesigning: true,
+      skip_codesigning: false,
       output_name: artifact_name,
       output_directory: out_path,
       export_method: "ad-hoc"
