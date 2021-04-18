@@ -80,8 +80,8 @@ jobs:
         #   FASTLANE_SESSION: ${{ env.FASTLANE_SESSION }}
         #   FASTLANE_USER: ${{ env.FASTLANE_USER }}
 
-      - name: Build
-        uses: maierj/fastlane-action@v2
+      - name: build
+        uses: maierj/fastlane-action@v2.0.0
         with:
           lane: 'beta_ci'
           subdirectory: 'ios'
