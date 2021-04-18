@@ -26,6 +26,7 @@ time              = Time.now.strftime("%Y-%m-%d-%H_%M")
 artifact_name     = 'artifact.ipa'
 provisioning_name = ENV['PROVISIONING_PROFILE']
 keychain_pwd      = ENV['KEYCHAIN_PASSWORD']
+keychain_name     = ENV['KEYCHAIN_NAME'] || 'fastlane_tmp_keychain'
 
 default_platform(:ios)
 
@@ -168,7 +169,7 @@ end
     end
 
     unlock_keychain(
-      path: "fastlane_tmp_keychain",
+      path: keychain_name,
       password: keychain_pwd,
       set_default: is_ci
     )
@@ -179,7 +180,7 @@ end
       type: "adhoc",
       username: ENV["APPLE_ID"],
       team_id: ENV["TEAM_ID"],
-      keychain_name: "fastlane_tmp_keychain",
+      keychain_name: keychain_name,
       keychain_password: keychain_pwd,
       readonly: is_ci,
       git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION']
