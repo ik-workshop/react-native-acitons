@@ -79,7 +79,8 @@ jobs:
         if: success()
         working-directory: ${{ env.WORKING_DIRECTORY }}
         run: |
-          ls -la ~
+          echo $PATH
+          
           export PATH="$HOME/.fastlane/bin:/usr/local/lib/ruby/gems/2.7.0/bin:/usr/local/opt/ruby@2.7/bin:$PATH"
           fastlane ios beta_ci
         env:
