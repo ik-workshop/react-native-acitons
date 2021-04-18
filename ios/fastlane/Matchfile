@@ -1,6 +1,11 @@
-git_url("https://github.com/ik-workshop/reactnativedemo-secrets")
+git_url(ENV["GIT_REPO_URL"])
 
 storage_mode("git")
+
+# replace with ENVIRONMENT
+app_identifier(ENV["APP_IDENTIFIER"])
+username(ENV["APPLE_ID"]) # Your Apple Developer Portal username
+git_branch("master")
 
 type("adhoc") # The default type, can be: appstore, adhoc, enterprise or development
 
@@ -11,3 +16,5 @@ type("adhoc") # The default type, can be: appstore, adhoc, enterprise or develop
 # Remove the # in the beginning of the line to enable the other options
 
 # The docs are available on https://docs.fastlane.tools/actions/match
+
+# https://docs.fastlane.tools/actions/match/

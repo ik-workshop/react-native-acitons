@@ -157,4 +157,49 @@ end
 
   end
 
+  desc "build on ci with all the values awailable in private git"
+  lane :beta_ci_adhoc do
+    if is_ci
+      # http://docs.fastlane.tools/actions/setup_ci/#setup_ci
+      setup_ci(
+        force: true,
+        provider: "travis"
+      )
+    end
+
+    unlock_keychain(
+      path: "fastlane_tmp_keychain",
+      password: keychain_pwd,
+      set_default: is_ci
+    )
+
+    match(
+      app_identifier: ENV["APP_IDENTIFIER"],
+      git_url: ENV["GIT_REPO_URL"],
+      type: "adhoc",
+      username: ENV["APPLE_ID"],
+      team_id: ENV["TEAM_ID"],
+      keychain_name: "fastlane_tmp_keychain",
+      keychain_password: keychain_pwd,
+      readonly: is_ci,
+      git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION']
+    )
+
+    update_code_signing_settings(
+      use_automatic_signing: true,
+      path: xcodeproj
+    )
+
+    # build_ios_app(
+    #   workspace: workspace,
+    #   configuration: "Release", #Debug
+    #   silent: true,
+    #   clean: true,
+    #   skip_codesigning: false,
+    #   output_name: artifact_name,
+    #   output_directory: out_path,
+    #   export_method: "ad-hoc"
+    # )
+  end
+
 end

@@ -51,3 +51,6 @@ build-ci: ## Build on CI
 
 bundle-ci: ## Run with bundle
 	@cd $(WORKING_DIRECTORY); bundle exec fastlane ios beta_ci
+
+bundle-ci-v1: ## Run with bundle
+	@cd $(WORKING_DIRECTORY); bundle exec fastlane ios beta_ci_adhoc
