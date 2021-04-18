@@ -48,7 +48,7 @@ jobs:
 
       - name: cache yarn
         uses: actions/cache@v2
-        id: yarn-cache
+        id: yarn-cached
         if: ${{ steps.yarn-cache.outputs.dir }}
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -80,7 +80,7 @@ jobs:
         working-directory: ${{ env.WORKING_DIRECTORY }}
         run: |
           echo $PATH
-          
+
           export PATH="$HOME/.fastlane/bin:/usr/local/lib/ruby/gems/2.7.0/bin:/usr/local/opt/ruby@2.7/bin:$PATH"
           fastlane ios beta_ci
         env:
