@@ -34,7 +34,6 @@ platform :ios do
 
 raise "Couldn't find profile #{provisioning_name}".red unless provisioning_name
 raise "Couldn't find keychain password #{keychain_pwd}".red unless keychain_pwd
-raise "Couldn't FASTLANE_SESSION".red unless ENV["FASTLANE_SESSION"]
 
 before_all do
   if is_ci
@@ -64,6 +63,8 @@ end
 
   desc "build on local"
   lane :beta_local do
+    raise "Couldn't FASTLANE_SESSION".red unless ENV["FASTLANE_SESSION"]
+    
     if is_ci
       puts "I'm a computer"
       exit
