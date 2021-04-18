@@ -161,10 +161,10 @@ end
   lane :beta_ci_adhoc do
     if is_ci
       # http://docs.fastlane.tools/actions/setup_ci/#setup_ci
-      # setup_ci(
-      #   force: true,
-      #   provider: "travis"
-      # )
+      setup_ci(
+        force: true,
+        provider: "travis"
+      )
     end
 
     unlock_keychain(
