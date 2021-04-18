@@ -16,6 +16,7 @@ env:
   FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
   SPACESHIP_ONLY_ALLOW_INTERACTIVE_2FA: true
   RUBY_VERSION: 2.7.0
+  TEAM_ID: ${{ secrets.TEAM_ID }}
 
 jobs:
   build:
@@ -71,18 +72,19 @@ jobs:
         run: |
           make setup-dependencies
 
-      # - name: fastlane run
-      #   if: success()
-      #   working-directory: ${{ env.WORKING_DIRECTORY }}
-      #   run: |
-      #     bundle exec fastlane ios beta_ci
-        # env:
-        #   FASTLANE_SESSION: ${{ env.FASTLANE_SESSION }}
-        #   FASTLANE_USER: ${{ env.FASTLANE_USER }}
+      - name: fastlane run
+        if: success()
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: |
+          unset CI
+          bundle exec fastlane ios beta_ci
+        env:
+          FASTLANE_SESSION: ${{ env.FASTLANE_SESSION }}
+          FASTLANE_USER: ${{ env.FASTLANE_USER }}
 
-      - name: build
-        uses: maierj/fastlane-action@v2.0.0
-        with:
-          lane: 'beta_ci'
-          subdirectory: 'ios'
+      # - name: build
+      #   uses: maierj/fastlane-action@v2.0.0
+      #   with:
+      #     lane: 'beta_ci'
+      #     subdirectory: 'ios'
 
