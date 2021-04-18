@@ -184,13 +184,18 @@ end
       keychain_name: keychain_name,
       keychain_password: keychain_pwd,
       readonly: is_ci,
-      git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION']
+      git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'],
+      force_for_new_devices: true,
     )
 
     update_code_signing_settings(
       use_automatic_signing: true,
       path: xcodeproj
     )
+
+    # update_project_provisioning(
+
+    # )
     if is_ci
       build_ios_app(
         workspace: workspace,
