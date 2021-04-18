@@ -43,12 +43,15 @@ jobs:
           working-directory: ${{ env.WORKING_DIRECTORY }}
 
       - name: get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        id: yarn-cache-dir-path
+        run: |
+          echo "::set-output name=dir::$(yarn cache dir)"
+
 
       - name: cache yarn
         uses: actions/cache@v2
-        if: ${{ steps.yarn-cache.outputs.dir }}
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        if: ${{ steps.yarn-cache-dir-path.outputs.dir }}
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
