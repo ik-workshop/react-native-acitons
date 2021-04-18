@@ -81,7 +81,10 @@ jobs:
         if: success()
         working-directory: ${{ env.WORKING_DIRECTORY }}
         run: |
-          fastlane ios beta_ci
+
+          # export PATH="$HOME/.fastlane/bin:/usr/local/lib/ruby/gems/2.7.0/bin:/usr/local/opt/ruby@2.7/bin:$PATH"
+          bundle exec fastlane ios beta_ci
+          # fastlane ios beta_ci
         env:
           FASTLANE_SESSION: ${{ env.FASTLANE_SESSION }}
           FASTLANE_USER: ${{ env.FASTLANE_USER }}
