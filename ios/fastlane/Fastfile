@@ -23,7 +23,7 @@ out_path      = '../storage'
 
 # environment variables
 time              = Time.now.strftime("%Y-%m-%d-%H_%M")
-artifact_name     = ENV['ARTIFACT_NAME']+".ipa" || time+'_artifact.ipa'
+artifact_name     = 'artifact.ipa'
 provisioning_name = ENV['PROVISIONING_PROFILE']
 keychain_pwd      = ENV['KEYCHAIN_PASSWORD']
 
@@ -44,10 +44,10 @@ before_all do
 end
 
 after_all do
-  if is_ci
-    clean_build_artifacts
-    putc "Cleaned up"
-  end
+  # if is_ci
+  #   clean_build_artifacts
+  #   putc "Cleaned up"
+  # end
 end
 
   desc "build artifact"
