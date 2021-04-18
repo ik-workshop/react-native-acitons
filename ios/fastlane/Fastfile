@@ -37,9 +37,9 @@ raise "Couldn't FASTLANE_SESSION".red unless ENV["FASTLANE_SESSION"]
 
 before_all do
   if is_ci
-    cocoapods(
-      repo_update: true
-    )
+    # cocoapods(
+    #   repo_update: true
+    # )
   end
 end
 
