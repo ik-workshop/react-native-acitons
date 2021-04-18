@@ -75,12 +75,7 @@ jobs:
         if: success()
         working-directory: ${{ env.WORKING_DIRECTORY }}
         run: |
-          env
-          echo "fastlane specific"
-          env | grep FASTLANE
-          echo "Run it"
           bundle exec fastlane ios beta_ci
-          # fastlane ios beta_ci
-        env:
-          FASTLANE_SESSION: ${{ env.FASTLANE_SESSION }}
-          FASTLANE_USER: ${{ env.FASTLANE_USER }}
+        # env:
+        #   FASTLANE_SESSION: ${{ env.FASTLANE_SESSION }}
+        #   FASTLANE_USER: ${{ env.FASTLANE_USER }}
