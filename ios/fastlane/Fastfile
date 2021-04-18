@@ -26,7 +26,7 @@ time              = Time.now.strftime("%Y-%m-%d-%H_%M")
 artifact_name     = 'artifact.ipa'
 provisioning_name = ENV['PROVISIONING_PROFILE']
 keychain_pwd      = ENV['KEYCHAIN_PASSWORD']
-keychain_name     = ENV['KEYCHAIN_NAME'] || 'fastlane_tmp_keychain'
+keychain_name     = ENV['KEYCHAIN_NAME'] || 'fastlane_tmp_keychain-db'
 
 default_platform(:ios)
 
@@ -197,7 +197,8 @@ end
       configuration: "Release", #Debug
       silent: true,
       clean: true,
-      skip_codesigning: false,
+      skip_codesigning: true,
+      # skip_codesigning: true,
       output_name: artifact_name,
       output_directory: out_path,
       export_method: "ad-hoc"
