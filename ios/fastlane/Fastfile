@@ -142,6 +142,11 @@ end
       )
     end
 
+    get_certificates(
+      development: true,
+      output_path: out_path
+    )
+
     get_provisioning_profile(
       adhoc: true,
       filename: app_name+".mobileprovision",

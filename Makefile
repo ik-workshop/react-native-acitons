@@ -48,3 +48,6 @@ build-ios: ## Build ios
 
 build-ci: ## Build on CI
 	@cd $(WORKING_DIRECTORY); fastlane ios beta_ci
+
+bundle-ci: ## Run with bundle
+	@cd $(WORKING_DIRECTORY); bundle exec fastlane ios beta_ci
