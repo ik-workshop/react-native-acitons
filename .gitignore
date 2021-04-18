@@ -108,3 +108,4 @@ nodes.md
 **/*.mobileprovision
 **/*.certSigningRequest
 storage/*
+.envrc
