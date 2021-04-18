@@ -71,18 +71,11 @@ jobs:
         run: |
           make setup-dependencies
 
-      # - name: 'bundle install && pod install'
-      #   if: success()
-      #   working-directory: ${{ env.WORKING_DIRECTORY }}
-      #   run: |
-      #     bundle install
-
       - name: fastlane run
         if: success()
         working-directory: ${{ env.WORKING_DIRECTORY }}
         run: |
-
-          # export PATH="$HOME/.fastlane/bin:/usr/local/lib/ruby/gems/2.7.0/bin:/usr/local/opt/ruby@2.7/bin:$PATH"
+          env
           bundle exec fastlane ios beta_ci
           # fastlane ios beta_ci
         env:
