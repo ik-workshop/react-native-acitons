@@ -15,7 +15,7 @@ env:
   FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
   FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
   SPACESHIP_ONLY_ALLOW_INTERACTIVE_2FA: true
-  RUBY_V: 2.7
+  RUBY_VERSION: 2.7.0
 
 jobs:
   build:
@@ -35,11 +35,11 @@ jobs:
         with:
           node-version: 15.14.0
 
-      - name: user ruby 3.0
+      - name: user ruby ${{ env.RUBY_VERSION }}
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-          # ruby-version: 2.7.0
+          ruby-version: ${{ env.RUBY_VERSION }}
           working-directory: ${{ env.WORKING_DIRECTORY }}
 
       - name: get yarn cache
