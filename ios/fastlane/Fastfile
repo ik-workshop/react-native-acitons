@@ -64,7 +64,7 @@ end
   desc "build on local"
   lane :beta_local do
     raise "Couldn't FASTLANE_SESSION".red unless ENV["FASTLANE_SESSION"]
-    
+
     if is_ci
       puts "I'm a computer"
       exit
@@ -192,16 +192,16 @@ end
       path: xcodeproj
     )
 
-    # build_ios_app(
-    #   workspace: workspace,
-    #   configuration: "Release", #Debug
-    #   silent: true,
-    #   clean: true,
-    #   skip_codesigning: false,
-    #   output_name: artifact_name,
-    #   output_directory: out_path,
-    #   export_method: "ad-hoc"
-    # )
+    build_ios_app(
+      workspace: workspace,
+      configuration: "Release", #Debug
+      silent: true,
+      clean: true,
+      skip_codesigning: false,
+      output_name: artifact_name,
+      output_directory: out_path,
+      export_method: "ad-hoc"
+    )
   end
 
 end
