@@ -199,12 +199,12 @@ end
       path: xcodeproj
     )
 
-    # update_project_provisioning(
-    #   xcodeproj: xcodeproj,
-    #   target_filter: app_name,
-    #   profile: profile_path,
-    #   build_configuration: "Release"
-    # )
+    update_project_provisioning(
+      xcodeproj: xcodeproj,
+      target_filter: app_name,
+      profile: profile_path,
+      build_configuration: "Release"
+    )
 
     if is_ci
       build_ios_app(
