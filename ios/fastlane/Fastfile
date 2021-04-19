@@ -29,6 +29,8 @@ keychain_pwd      = ENV['KEYCHAIN_PASSWORD']
 keychain_name     = ENV['KEYCHAIN_NAME'] || 'fastlane_tmp_keychain-db'
 app_identifier     = ENV['APP_IDENTIFIER']
 configuration      = "Release"
+xcargs            = '-UseModernBuildSystem=NO'
+
 
 default_platform(:ios)
 
@@ -38,18 +40,9 @@ raise "Couldn't find profile #{provisioning_name}".red unless provisioning_name
 raise "Couldn't find keychain password #{keychain_pwd}".red unless keychain_pwd
 
 before_all do
-  if is_ci
-    # cocoapods(
-    #   repo_update: true
-    # )
-  end
 end
 
 after_all do
-  # if is_ci
-  #   clean_build_artifacts
-  #   putc "Cleaned up"
-  # end
 end
 
   desc "build artifact"
@@ -227,7 +220,7 @@ end
         xcargs:  is_ci? ? "-allowProvisioningUpdates -UseNewBuildSystem=YES" : "-allowProvisioningUpdates",
         # export_xcargs: "-allowProvisioningUpdates",
         export_team_id: ENV["TEAM_ID"],
-        buildlog_path: "#{out_path}/logs"
+        buildlog_path: is_ci? ? nil : "#{out_path}/logs"
       )
     end
   end
@@ -283,7 +276,7 @@ end
         xcargs:  is_ci? ? "-allowProvisioningUpdates -UseNewBuildSystem=YES" : "-allowProvisioningUpdates",
         # export_xcargs: "-allowProvisioningUpdates",
         export_team_id: ENV["TEAM_ID"],
-        buildlog_path: "#{out_path}/logs"
+        buildlog_path: is_ci? ? nil : "#{out_path}/logs"
       )
     end
   end
