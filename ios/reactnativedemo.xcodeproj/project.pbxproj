@@ -489,7 +489,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "6bdd6346-8478-42d7-8b4a-09e2bb0df7a4";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc org.reactjs.native.example.StampsApp";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/reactnativedemo.app/reactnativedemo";
 			};
@@ -547,7 +548,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.StampsApp;
 				PRODUCT_NAME = reactnativedemo;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "6bdd6346-8478-42d7-8b4a-09e2bb0df7a4";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc org.reactjs.native.example.StampsApp";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
