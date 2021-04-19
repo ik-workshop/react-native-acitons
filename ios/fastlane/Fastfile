@@ -213,7 +213,7 @@ end
         silent: true,
         clean: true,
         # skip_codesigning: true,
-        skip_codesigning: false,
+        skip_codesigning: is_ci,
         output_name: artifact_name,
         output_directory: out_path,
         export_method: "ad-hoc",
