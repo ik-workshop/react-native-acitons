@@ -27,6 +27,9 @@ artifact_name     = 'artifact.ipa'
 provisioning_name = ENV['PROVISIONING_PROFILE']
 keychain_pwd      = ENV['KEYCHAIN_PASSWORD']
 keychain_name     = ENV['KEYCHAIN_NAME'] || 'fastlane_tmp_keychain-db'
+match_type        = "adhoc"
+app_identifier     = ENV['APP_IDENTIFIER']
+configuration      = "Release"
 
 default_platform(:ios)
 
@@ -178,14 +181,19 @@ end
     match(
       app_identifier: ENV["APP_IDENTIFIER"],
       git_url: ENV["GIT_REPO_URL"],
-      type: "adhoc",
+      type: match_type,
       username: ENV["APPLE_ID"],
       team_id: ENV["TEAM_ID"],
       keychain_name: keychain_name,
       keychain_password: keychain_pwd,
-      readonly: is_ci,
+      readonly: false,
       git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'],
       force_for_new_devices: true,
+    )
+
+    update_app_identifier(
+      xcodeproj: xcodeproj, # Optional path to xcodeproj, will use the first .xcodeproj if not set
+      plist_path: app_name+"/Info.plist", # Path to info plist file, relative to xcodeproj
     )
 
     update_code_signing_settings(
@@ -193,13 +201,26 @@ end
       path: xcodeproj
     )
 
-    # update_project_provisioning(
+    profile_path = ENV["sigh_#{app_identifier}_#{match_type}_profile-path"]
 
-    # )
+    sync_code_signing(
+      type: match_type,
+      app_identifier: app_identifier,
+      readonly: true
+    )
+
+    enable_automatic_code_signing(path: xcodeproj)
+    get_provisioning_profile
+    update_project_provisioning(
+      xcodeproj: xcodeproj,
+      target_filter: app_name,
+      profile: profile_path,
+      build_configuration: "Release"
+    )
     if is_ci
       build_ios_app(
         workspace: workspace,
-        configuration: "Release", #Debug
+        configuration: configuration, #Debug
         silent: true,
         clean: true,
         # skip_codesigning: true,
@@ -207,7 +228,6 @@ end
         output_name: artifact_name,
         output_directory: out_path,
         export_method: "ad-hoc",
-        # export_xcargs: "-allowProvisioningUpdates",
         xcargs: "-allowProvisioningUpdates"
       )
     end
