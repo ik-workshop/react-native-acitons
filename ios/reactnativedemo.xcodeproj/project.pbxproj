@@ -438,7 +438,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = RC8A7VVD5V;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -472,7 +472,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = RC8A7VVD5V;
 				INFOPLIST_FILE = reactnativedemoTests/Info.plist;
@@ -489,7 +489,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6bdd6346-8478-42d7-8b4a-09e2bb0df7a4";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc org.reactjs.native.example.StampsApp";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/reactnativedemo.app/reactnativedemo";
 			};
@@ -502,7 +503,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 64;
 				DEVELOPMENT_TEAM = RC8A7VVD5V;
 				ENABLE_BITCODE = NO;
@@ -532,7 +533,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 64;
 				DEVELOPMENT_TEAM = RC8A7VVD5V;
 				INFOPLIST_FILE = reactnativedemo/Info.plist;
@@ -547,7 +548,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.StampsApp;
 				PRODUCT_NAME = reactnativedemo;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6bdd6346-8478-42d7-8b4a-09e2bb0df7a4";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc org.reactjs.native.example.StampsApp";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

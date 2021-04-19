@@ -166,17 +166,30 @@ end
   lane :beta_ci_adhoc do
     if is_ci
       # http://docs.fastlane.tools/actions/setup_ci/#setup_ci
-      setup_ci(
-        force: true,
-        provider: "travis"
-      )
+      # setup_ci(
+      #   force: true,
+      #   provider: "travis"
+      # )
     end
+
+    create_keychain(
+      name: keychain_name,
+      password: keychain_pwd,
+      default_keychain: is_ci,
+      unlock: true,
+      timeout: 3600,
+      lock_when_sleeps: true,
+      add_to_search_list: true
+    )
 
     unlock_keychain(
       path: keychain_name,
       password: keychain_pwd,
       set_default: is_ci
     )
+
+# security list-keychains -d user
+    sh("security", "list-keychains", "-d", "user")
 
     match(
       app_identifier: ENV["APP_IDENTIFIER"],
@@ -190,37 +203,39 @@ end
       git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'],
       force_for_new_devices: false,
     )
+# security find-identity -v -p codesigning fastlane_tmp_keychain-db
+    sh("security", "find-identity", "-vp", "codesigning", keychain_name)
 
     profile_path = ENV["sigh_#{app_identifier}_#{match_type}_profile-path"]
     install_provisioning_profile(path: profile_path)
 
-    update_code_signing_settings(
-      use_automatic_signing: false,
-      path: xcodeproj
-    )
+    # update_code_signing_settings(
+    #   use_automatic_signing: false,
+    #   path: xcodeproj
+    # )
 
-    update_project_provisioning(
-      xcodeproj: xcodeproj,
-      target_filter: app_name,
-      profile: profile_path,
-      build_configuration: "Release"
-    )
+    # update_project_provisioning(
+    #   xcodeproj: xcodeproj,
+    #   target_filter: app_name,
+    #   profile: profile_path,
+    #   build_configuration: "Release"
+    # )
 
     if is_ci
-      build_ios_app(
-        workspace: workspace,
-        configuration: configuration, #Debug
-        silent: true,
-        clean: true,
-        # skip_codesigning: true,
-        skip_codesigning: is_ci,
-        output_name: artifact_name,
-        output_directory: out_path,
-        export_method: "ad-hoc",
-        xcargs: "-allowProvisioningUpdates",
-        export_xcargs: "-allowProvisioningUpdates",
-        export_team_id: ENV["TEAM_ID"]
-      )
+      # build_ios_app(
+      #   workspace: workspace,
+      #   configuration: configuration, #Debug
+      #   silent: true,
+      #   clean: true,
+      #   # skip_codesigning: true,
+      #   skip_codesigning: is_ci,
+      #   output_name: artifact_name,
+      #   output_directory: out_path,
+      #   export_method: "ad-hoc",
+      #   xcargs: "-allowProvisioningUpdates -UseNewBuildSystem=YES",
+      #   # export_xcargs: "-allowProvisioningUpdates",
+      #   export_team_id: ENV["TEAM_ID"]
+      # )
     end
   end
 
