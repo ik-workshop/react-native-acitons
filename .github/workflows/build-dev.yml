@@ -1,5 +1,5 @@
 ---
-name: build-ios-app-development-profile
+name: build-ios-development
 on:
   push:
   workflow_dispatch:

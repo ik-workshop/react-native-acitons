@@ -1,5 +1,5 @@
 ---
-name: build-ios-app-with-fastlane
+name: build-ios-adhoc
 on:
   push:
   workflow_dispatch:
