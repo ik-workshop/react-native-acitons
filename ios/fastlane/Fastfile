@@ -218,7 +218,8 @@ end
         output_directory: out_path,
         export_method: "ad-hoc",
         xcargs: "-allowProvisioningUpdates",
-        export_xcargs: "-allowProvisioningUpdates"
+        export_xcargs: "-allowProvisioningUpdates",
+        export_team_id: ENV["TEAM_ID"]
       )
     end
   end
