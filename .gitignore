@@ -107,5 +107,5 @@ nodes.md
 **/*.ipa
 **/*.mobileprovision
 **/*.certSigningRequest
-storage/*
+# storage/*
 .envrc
