@@ -186,15 +186,14 @@ end
       team_id: ENV["TEAM_ID"],
       keychain_name: keychain_name,
       keychain_password: keychain_pwd,
-      readonly: false,
+      readonly: true,
       git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'],
-      force_for_new_devices: true,
+      force_for_new_devices: false,
     )
-
-    update_app_identifier(
-      xcodeproj: xcodeproj, # Optional path to xcodeproj, will use the first .xcodeproj if not set
-      plist_path: app_name+"/Info.plist", # Path to info plist file, relative to xcodeproj
-    )
+    # update_app_identifier(
+    #   xcodeproj: xcodeproj, # Optional path to xcodeproj, will use the first .xcodeproj if not set
+    #   plist_path: app_name+"/Info.plist", # Path to info plist file, relative to xcodeproj
+    # )
 
     update_code_signing_settings(
       use_automatic_signing: true,
@@ -202,21 +201,19 @@ end
     )
 
     profile_path = ENV["sigh_#{app_identifier}_#{match_type}_profile-path"]
+    # install_provisioning_profile(path: "profiles/profile.mobileprovision")
 
-    sync_code_signing(
-      type: match_type,
-      app_identifier: app_identifier,
-      readonly: true
-    )
+    # enable_automatic_code_signing(path: xcodeproj)
 
-    enable_automatic_code_signing(path: xcodeproj)
-    get_provisioning_profile
-    update_project_provisioning(
-      xcodeproj: xcodeproj,
-      target_filter: app_name,
-      profile: profile_path,
-      build_configuration: "Release"
-    )
+    # get_provisioning_profile
+
+    # update_project_provisioning(
+    #   xcodeproj: xcodeproj,
+    #   target_filter: app_name,
+    #   profile: profile_path,
+    #   build_configuration: "Release"
+    # )
+
     if is_ci
       build_ios_app(
         workspace: workspace,
