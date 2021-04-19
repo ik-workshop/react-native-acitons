@@ -222,20 +222,21 @@ end
     # )
 
     if is_ci
-      # build_ios_app(
-      #   workspace: workspace,
-      #   configuration: configuration, #Debug
-      #   silent: true,
-      #   clean: true,
-      #   # skip_codesigning: true,
-      #   skip_codesigning: is_ci,
-      #   output_name: artifact_name,
-      #   output_directory: out_path,
-      #   export_method: "ad-hoc",
-      #   xcargs: "-allowProvisioningUpdates -UseNewBuildSystem=YES",
-      #   # export_xcargs: "-allowProvisioningUpdates",
-      #   export_team_id: ENV["TEAM_ID"]
-      # )
+      build_ios_app(
+        workspace: workspace,
+        configuration: configuration, #Debug
+        silent: true,
+        clean: true,
+        skip_codesigning: true,
+        output_name: artifact_name,
+        output_directory: out_path,
+        export_method: "ad-hoc",
+        xcargs:  is_ci? ? "-allowProvisioningUpdates -UseNewBuildSystem=YES" : "-allowProvisioningUpdates",
+        # export_xcargs: "-allowProvisioningUpdates",
+        export_team_id: ENV["TEAM_ID"],
+        skip_archive: true,
+        buildlog_path: "#{out_path}/logs"
+      )
     end
   end
 
