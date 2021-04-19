@@ -1,6 +1,7 @@
 ---
 name: build-ios-app-with-fastlane
 on:
+  push:
   workflow_dispatch:
 
 env:
