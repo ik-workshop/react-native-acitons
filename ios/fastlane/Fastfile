@@ -27,7 +27,6 @@ artifact_name     = 'artifact.ipa'
 provisioning_name = ENV['PROVISIONING_PROFILE']
 keychain_pwd      = ENV['KEYCHAIN_PASSWORD']
 keychain_name     = ENV['KEYCHAIN_NAME'] || 'fastlane_tmp_keychain-db'
-match_type        = "adhoc"
 app_identifier     = ENV['APP_IDENTIFIER']
 configuration      = "Release"
 
@@ -164,13 +163,7 @@ end
 
   desc "build on ci with all the values awailable in private git"
   lane :beta_ci_adhoc do
-    if is_ci
-      # http://docs.fastlane.tools/actions/setup_ci/#setup_ci
-      # setup_ci(
-      #   force: true,
-      #   provider: "travis"
-      # )
-    end
+    match_type        = "adhoc"
 
     create_keychain(
       name: keychain_name,
@@ -228,13 +221,68 @@ end
         silent: true,
         clean: true,
         skip_codesigning: true,
-        output_name: artifact_name,
+        output_name: "adhoc.#{artifact_name}",
         output_directory: out_path,
         export_method: "ad-hoc",
         xcargs:  is_ci? ? "-allowProvisioningUpdates -UseNewBuildSystem=YES" : "-allowProvisioningUpdates",
         # export_xcargs: "-allowProvisioningUpdates",
         export_team_id: ENV["TEAM_ID"],
-        skip_archive: true,
+        buildlog_path: "#{out_path}/logs"
+      )
+    end
+  end
+
+  desc "build on ci with development profile"
+  lane :beta_ci_dev do
+    match_type = 'development'
+    create_keychain(
+      name: keychain_name,
+      password: keychain_pwd,
+      default_keychain: is_ci,
+      unlock: true,
+      timeout: 3600,
+      lock_when_sleeps: true,
+      add_to_search_list: true
+    )
+    unlock_keychain(
+      path: keychain_name,
+      password: keychain_pwd,
+      set_default: is_ci
+    )
+# security list-keychains -d user
+    sh("security", "list-keychains", "-d", "user")
+
+    match(
+      app_identifier: ENV["APP_IDENTIFIER"],
+      git_url: ENV["GIT_REPO_URL"],
+      type: match_type,
+      username: ENV["APPLE_ID"],
+      team_id: ENV["TEAM_ID"],
+      keychain_name: keychain_name,
+      keychain_password: keychain_pwd,
+      readonly: is_ci,
+      git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'],
+      force_for_new_devices: false,
+    )
+# security find-identity -v -p codesigning fastlane_tmp_keychain-db
+    sh("security", "find-identity", "-vp", "codesigning", keychain_name)
+
+    profile_path = ENV["sigh_#{app_identifier}_#{match_type}_profile-path"]
+    install_provisioning_profile(path: profile_path)
+
+    if is_ci
+      build_ios_app(
+        workspace: workspace,
+        configuration: configuration, #Debug
+        silent: true,
+        clean: true,
+        skip_codesigning: true,
+        output_name: "dev.#{artifact_name}",
+        output_directory: out_path,
+        export_method: "ad-hoc",
+        xcargs:  is_ci? ? "-allowProvisioningUpdates -UseNewBuildSystem=YES" : "-allowProvisioningUpdates",
+        # export_xcargs: "-allowProvisioningUpdates",
+        export_team_id: ENV["TEAM_ID"],
         buildlog_path: "#{out_path}/logs"
       )
     end

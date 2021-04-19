@@ -36,6 +36,11 @@ build on ci
 fastlane ios beta_ci_adhoc
 ```
 build on ci with all the values awailable in private git
+### ios beta_ci_dev
+```
+fastlane ios beta_ci_dev
+```
+build on ci with development profile
 
 ----
 
