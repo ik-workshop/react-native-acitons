@@ -217,7 +217,8 @@ end
         output_name: artifact_name,
         output_directory: out_path,
         export_method: "ad-hoc",
-        xcargs: "-allowProvisioningUpdates"
+        xcargs: "-allowProvisioningUpdates",
+        export_xcargs: "-allowProvisioningUpdates"
       )
     end
   end
