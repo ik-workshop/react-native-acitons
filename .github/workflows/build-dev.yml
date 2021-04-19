@@ -77,6 +77,6 @@ jobs:
       - name: upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: adhoc.${{ env.ARTIFACT_NAME }}.ipa
+          name: dev.${{ env.ARTIFACT_NAME }}.ipa
           path: storage/
 
