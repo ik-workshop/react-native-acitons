@@ -186,26 +186,18 @@ end
       team_id: ENV["TEAM_ID"],
       keychain_name: keychain_name,
       keychain_password: keychain_pwd,
-      readonly: true,
+      readonly: is_ci,
       git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'],
       force_for_new_devices: false,
-    )
-    # update_app_identifier(
-    #   xcodeproj: xcodeproj, # Optional path to xcodeproj, will use the first .xcodeproj if not set
-    #   plist_path: app_name+"/Info.plist", # Path to info plist file, relative to xcodeproj
-    # )
-
-    update_code_signing_settings(
-      use_automatic_signing: true,
-      path: xcodeproj
     )
 
     profile_path = ENV["sigh_#{app_identifier}_#{match_type}_profile-path"]
     install_provisioning_profile(path: profile_path)
 
-    # enable_automatic_code_signing(path: xcodeproj)
-
-    # get_provisioning_profile
+    update_code_signing_settings(
+      use_automatic_signing: true,
+      path: xcodeproj
+    )
 
     # update_project_provisioning(
     #   xcodeproj: xcodeproj,
